@@ -6,7 +6,7 @@
 #define BUFFER_SIZE 5
 
 typedef int buffer_item;
-sem_t full, empty; // 'boþ' ve 'dolu' semaforlarý
+sem_t full, empty; // 'boÅŸ' ve 'dolu' semaforlarÄ±
 pthread_mutex_t mutex; // Mutex semaforu
 buffer_item buffer[BUFFER_SIZE]; // Buffer
 int bufferCounter; // Buffer counter
@@ -72,7 +72,7 @@ void *consumer(void *param) // Consumer thread
 
 int insert_item(buffer_item item) // Buffer'a veri yaz
 {
-	if (bufferCounter < BUFFER_SIZE) // Buffer dolu deðilse veriyi yaz
+	if (bufferCounter < BUFFER_SIZE) // Buffer dolu deÄŸilse veriyi yaz
 	{
 		buffer[bufferCounter] = item;
 		bufferCounter++;
@@ -86,13 +86,13 @@ int insert_item(buffer_item item) // Buffer'a veri yaz
 
 int remove_item(buffer_item *item) // Buffer'dan veri al
 {
-	if (bufferCounter > 0) // Buffer boþ deðilse veriyi al
+	if (bufferCounter > 0) // Buffer boÅŸ deÄŸilse veriyi al
 	{
 		*item = buffer[(bufferCounter - 1)];
 		bufferCounter--;
 		return 0;
 	}
-	else // Buffer boþ ise hata ver
+	else // Buffer boÅŸ ise hata ver
 	{
 		return -1;
 	}
@@ -101,22 +101,22 @@ int remove_item(buffer_item *item) // Buffer'dan veri al
 int main(int argc, char *argv[])
 {
 	int i, j;
-	int sleepMain = atoi(argv[1]); // main fonksiyonunun uyuma zamaný
-	int producerNum = atoi(argv[2]); // Producer thread sayýsý
-	int consumerNum = atoi(argv[3]); // Consumer thread sayýsý
+	int sleepMain = atoi(argv[1]); // main fonksiyonunun uyuma zamanÄ±
+	int producerNum = atoi(argv[2]); // Producer thread sayÄ±sÄ±
+	int consumerNum = atoi(argv[3]); // Consumer thread sayÄ±sÄ±
 
-	pthread_mutex_init(&mutex, NULL); // Mutex oluþturma
-	sem_init(&full, 0, 0); // 'full' semaforunu yükle ve 0 ata
-	sem_init(&empty, 0, BUFFER_SIZE); // 'empty' semaforunu yükle ve buffer boyutunu ata
+	pthread_mutex_init(&mutex, NULL); // Mutex oluÅŸturma
+	sem_init(&full, 0, 0); // 'full' semaforunu yÃ¼kle ve 0 ata
+	sem_init(&empty, 0, BUFFER_SIZE); // 'empty' semaforunu yÃ¼kle ve buffer boyutunu ata
 	pthread_attr_init(&attr);
 	bufferCounter = 0; // Initialize buffer
 
-	for (i = 0; i < producerNum; i++) // Producer thread oluþturma
+	for (i = 0; i < producerNum; i++) // Producer thread oluÅŸturma
 	{
 		pthread_create(&tid, &attr, producer, NULL);
 	}
 
-	for (j = 0; j < consumerNum; j++) // Consumer thread oluþturma
+	for (j = 0; j < consumerNum; j++) // Consumer thread oluÅŸturma
 	{
 		pthread_create(&tid, &attr, consumer, NULL);
 	}
