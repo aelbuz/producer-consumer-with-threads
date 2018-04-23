@@ -1,4 +1,4 @@
-# producer-consumer-with-threads
+# Producer-Consumer Problem With Threads
 
 Programı çalıştırırken main'e 3 adet parametre gönderilmelidir. Bunlar sırasıyla;
   1. "main" fonksiyonunun uyuma süresi
